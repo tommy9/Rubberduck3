@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubberduck.UI.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace Rubberduck.UI.Xaml.Controls
         public DialogShell()
         {
             InitializeComponent();
+        }
+
+        private IDialogShellViewModel ViewModel => DataContext as IDialogShellViewModel;
+
+
+        private void HandleOptionChecked(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OptionIsChecked = true;
+        }
+
+        private void HandleOptionUnchecked(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OptionIsChecked = false;
         }
     }
 }

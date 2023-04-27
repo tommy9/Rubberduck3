@@ -10,6 +10,7 @@ namespace Rubberduck.UI.Abstract
         string InstructionsLabelText { get; set; }
         string ContentsText { get; set; }
         string OptionLabelText { get; set; }
+        bool OptionIsChecked { get; set; }
         string CancelButtonText { get; set; }
         string DefaultButtonText { get; set; }
         //Whether or not to display the OptionLabel and bind OptionLabelText

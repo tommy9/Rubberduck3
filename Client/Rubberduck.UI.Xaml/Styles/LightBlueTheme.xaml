@@ -51,8 +51,10 @@
     <Color x:Key="ToolBarSubMenuBackgroundColor">#FFEEF5FD</Color>
 
     <Color x:Key="DialogTitleBarBackgroundColor">#FF2E5496</Color>
+    <Color x:Key="DefaultButtonBackgroundColor">#FF345DA1</Color>
+    <Color x:Key="MinMaxWindowButtonBackgroundColor">#FF272836</Color>
 
-    <SolidColorBrush x:Key="HighlightGradientStartBrush" Color="{StaticResource HighlightGradientStartColor}"/>
+        <SolidColorBrush x:Key="HighlightGradientStartBrush" Color="{StaticResource HighlightGradientStartColor}"/>
     <SolidColorBrush x:Key="HighlightGradientEndBrush" Color="{StaticResource HighlightGradientEndColor}"/>
     <SolidColorBrush x:Key="ControlGradientStartBrush" Color="{StaticResource ControlGradientStartColor}"/>
     <SolidColorBrush x:Key="ControlGradientEndBrush" Color="{StaticResource ControlGradientEndColor}"/>
@@ -100,8 +102,10 @@
     <SolidColorBrush x:Key="ToolBarToggleButtonHorizontalBackgroundBrush" Color="{StaticResource ToolBarToggleButtonHorizontalBackgroundColor}"/>
     <SolidColorBrush x:Key="ToolBarMenuBorderBrush" Color="{StaticResource ToolBarMenuBorderColor}"/>
     <SolidColorBrush x:Key="ToolBarSubMenuBackgroundBrush" Color="{StaticResource ToolBarSubMenuBackgroundColor}"/>
-    
+
     <SolidColorBrush x:Key="DialogTitleBarBackgroundBrush" Color="{StaticResource DialogTitleBarBackgroundColor}" />
+    <SolidColorBrush x:Key="DefaultButtonBackgroundBrush" Color="{StaticResource DefaultButtonBackgroundColor}" />
+    <SolidColorBrush x:Key="MinMaxWindowButtonBackgroundBrush" Color="{StaticResource MinMaxWindowButtonBackgroundColor}" />
 
     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource WhiteColor}" />
     <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}" />
