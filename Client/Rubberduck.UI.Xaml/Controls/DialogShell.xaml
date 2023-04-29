@@ -6,35 +6,33 @@
              xmlns:vm="clr-namespace:Rubberduck.UI.Abstract;assembly=Rubberduck.UI"
              xmlns:local="clr-namespace:Rubberduck.UI.Xaml.Controls"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance {x:Type vm:IDialogShellViewModel}, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance {x:Type local:DialogShellDesignViewModel}, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="600">
+    <!--d:DataContext="{d:DesignInstance {x:Type vm:IDialogShellViewModel}, IsDesignTimeCreatable=False}"-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/DefaultStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <BitmapImage x:Key="DuckyIcon" UriSource="pack://application:,,,/Rubberduck.Resources;component/Icons/Ducky.ico" />
-            <BitmapImage x:Key="DummyIcon" UriSource="pack://application:,,,/Rubberduck.Resources;component/Icons/Custom/PNG/ObjectProperties.png" />
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
+                </Style.Setters>
+            </Style>
             <Style x:Key="TitleLabelStyle" TargetType="TextBlock">
                 <Style.Setters>
-                    <Setter Property="FontFamily" Value="Segoe UI" />
                     <Setter Property="FontSize" Value="16" />
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                 </Style.Setters>
             </Style>
-            <Style x:Key="InstructionsStyle" TargetType="TextBlock">
+            <Style x:Key="MoreInformationStyle" TargetType="Expander">
                 <Style.Setters>
-                    <Setter Property="FontFamily" Value="Segoe UI" />
-                    <Setter Property="FontSize" Value="12" />
-                    <Setter Property="FontWeight" Value="Normal" />
                     <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                 </Style.Setters>
-            </Style>
+            </Style>            
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Style.Setters>
-                    <Setter Property="FontFamily" Value="Segoe UI" />
-                    <Setter Property="FontSize" Value="12" />
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                     <Setter Property="Padding" Value="5" />
@@ -42,46 +40,9 @@
             </Style>
             <Style x:Key="OptionsTextStyle" TargetType="CheckBox">
                 <Style.Setters>
-                    <Setter Property="FontFamily" Value="Segoe UI" />
                     <Setter Property="FontSize" Value="11" />
-                    <Setter Property="FontWeight" Value="Normal" />
                     <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                 </Style.Setters>
-            </Style>
-            <!--https://blog.magnusmontin.net/2013/03/16/how-to-create-a-custom-window-in-wpf/-->
-            <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <Border
-                            x:Name="Chrome"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Margin="0"
-                            Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True">
-                                <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Background" Value="{StaticResource MinMaxWindowButtonBackgroundBrush}"/>
-                <Setter Property="FontFamily" Value="Webdings"/>
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Margin" Value="0,5,3,5"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Foreground" Value="Gray" />
-                    </Trigger>
-                </Style.Triggers>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -89,54 +50,47 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{DynamicResource DialogTitleBarBackgroundBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="{StaticResource DuckyIcon}" Margin="4" Height="16"/>
-            <TextBlock Grid.Column="1" Text="{Binding TitleText}" Foreground="{StaticResource WhiteBrush}" Margin="4" d:Text="Rubberduck | DialogShell" />
-            <Button Grid.Column="2" x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}" Content="0" Visibility="{Binding CanResize, Converter={StaticResource BoolToVisibility}}" />
-            <Button Grid.Column="3" x:Name="restoreButton" Style="{StaticResource WindowButtonStyle}" Content="1" Visibility="{Binding CanResize, Converter={StaticResource BoolToVisibility}}" />
-            <Button Grid.Column="4" x:Name="closeButton" Style="{StaticResource WindowButtonStyle}" Background="Red" Content="r" />
-        </Grid>
-        <Grid Grid.Row="1">
+        <Grid x:Name="TitleLabelRow" Grid.Row="0">
             <StackPanel Margin="8,3,8,0" Orientation="Horizontal">
-                <Image Source="{Binding IconSource}" Height="16" d:Source="{StaticResource DummyIcon}" />
-                <TextBlock Text="{Binding TitleLabelText}" Style="{StaticResource TitleLabelStyle}" Margin="10,0,0,0" d:Text="Title Label Text" />
+                <Image Source="{Binding IconSource}" Height="16" />
+                <TextBlock Text="{Binding TitleLabelText}" Style="{StaticResource TitleLabelStyle}" Margin="10,0,0,0" />
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Margin="20,3,20,0">
-            <TextBlock Text="{Binding InstructionsLabelText}" Style="{StaticResource InstructionsStyle}" d:Text="Instructions Text"/>
+        <Grid x:Name="InstructionsRow" Grid.Row="1" Margin="20,3,20,0">
+            <TextBlock Text="{Binding InstructionsLabelText}" />
         </Grid>
-        <Border Grid.Row="3" Margin="20,3,20,0" BorderThickness="1" BorderBrush="{StaticResource HighlightBorderActiveBrush}">
-            <TextBlock Text="{Binding ContentsText}" TextWrapping="Wrap" MinHeight="{Binding ClientAreaMinHeight}" d:Text="Contents"/>
+        <Border x:Name="ContentsArea" Grid.Row="2" Margin="20,3,20,0" BorderThickness="1" BorderBrush="{StaticResource HighlightBorderActiveBrush}">
+            <ContentControl Content="{Binding MainContentControl}" />
         </Border>
-        <Grid Grid.Row="4">
+        <Grid x:Name="MoreInformationRow" Grid.Row="3" Margin="20,3,20,0" MaxHeight="100">
+            <ScrollViewer Height="50">
+                <Expander HorizontalAlignment="Left" Header="More information" ExpandDirection="Down" IsExpanded="False" Style="{StaticResource MoreInformationStyle}" d:IsExpanded="True" >
+                    <TextBlock Text="{Binding MoreInformationText}" TextWrapping="Wrap" />
+                </Expander>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="SeparatorRow" Grid.Row="4">
             <Separator Margin="10,5,10,5" />
         </Grid>
-        <Grid Grid.Row="5">
+        <Grid x:Name="BottomSection" Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <CheckBox x:Name="OptionCheckbox" Margin="20,10,10,10" Style="{StaticResource OptionsTextStyle}"
-                Content="{Binding OptionLabelText}" Checked="HandleOptionChecked" Unchecked="HandleOptionUnchecked" d:Content="OptionsLabel" />
+                Content="{Binding OptionLabelText}" Checked="HandleOptionChecked" Unchecked="HandleOptionUnchecked" />
             </Grid>
             <Grid Grid.Column="1" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="10,10,10,10" Content="{Binding CancelButtonText}" Style="{StaticResource ButtonStyle}" d:Content="CancelButton" />
-                    <Button Margin="10,10,10,10" Content="{Binding DefaultButtonText}" Style="{StaticResource ButtonStyle}" Background="{StaticResource DefaultButtonBackgroundBrush}" d:Content="DefaultButton" />
+                    <Button Margin="10,10,10,10" Content="{Binding CancelButtonText}" IsCancel="True" Visibility="{Binding HasCancelButton, Converter={StaticResource BoolToVisibility}}" Style="{StaticResource ButtonStyle}" />
+                    <Button Margin="10,10,10,10" Content="{Binding DefaultButtonText}" IsDefault="True" Style="{StaticResource ButtonStyle}" Background="{StaticResource DefaultButtonBackgroundBrush}" />
                 </StackPanel>
             </Grid>
         </Grid>

@@ -249,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ducky.ico" />
+    <Compile Include="SampleData\DialogShellDesignViewModel.cs" />
     <Compile Include="SampleData\SyncPanelDesignViewModel.cs" />
     <Compile Include="SampleData\CodePaneDesignViewModel.cs" />
     <Compile Include="SampleData\StatusBarDesignViewModel.cs" />
