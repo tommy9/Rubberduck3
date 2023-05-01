@@ -21,8 +21,9 @@ namespace Rubberduck.UI.Xaml.Controls
     /// </summary>
     public partial class DialogShell : UserControl
     {
-        public DialogShell()
+        public DialogShell(IDialogShellViewModel viewModel)
         {
+            DataContext = viewModel;
             InitializeComponent();
         }
 

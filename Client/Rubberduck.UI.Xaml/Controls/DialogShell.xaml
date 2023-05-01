@@ -68,12 +68,12 @@
         <Border x:Name="ContentsArea" Grid.Row="2" Margin="20,3,20,0" BorderThickness="1" BorderBrush="{StaticResource HighlightBorderActiveBrush}">
             <ContentControl Content="{Binding MainContentControl}" />
         </Border>
-        <Grid x:Name="MoreInformationRow" Grid.Row="3" Margin="20,3,20,0" MaxHeight="100">
-            <ScrollViewer Height="50">
-                <Expander HorizontalAlignment="Left" Header="More information" ExpandDirection="Down" IsExpanded="False" Style="{StaticResource MoreInformationStyle}" d:IsExpanded="True" >
+        <Grid x:Name="MoreInformationRow" Grid.Row="3" Margin="20,3,20,0" MaxHeight="200">
+            <Expander Header="More information" ExpandDirection="Down" IsExpanded="False" Style="{StaticResource MoreInformationStyle}" d:IsExpanded="True" >
+                <!--<ScrollViewer>-->
                     <TextBlock Text="{Binding MoreInformationText}" TextWrapping="Wrap" />
-                </Expander>
-            </ScrollViewer>
+                <!--</ScrollViewer>-->
+            </Expander>
         </Grid>
         <Grid x:Name="SeparatorRow" Grid.Row="4">
             <Separator Margin="10,5,10,5" />
